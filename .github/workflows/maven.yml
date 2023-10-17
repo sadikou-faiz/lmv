@@ -28,3 +28,17 @@ jobs:
       with:
         name: my-artifact  # Choisissez un nom pour votre artefact
         path: target/       # Chemin vers le répertoire contenant les fichiers JAR ou WAR
+
+    - name: Get Artifact URL
+      id: artifact_url
+      run: |
+        ARTIFACT_NAME=$(curl -s "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts" | jq -r '.artifacts[0].name')
+        ARTIFACT_URL="https://github.com/${GITHUB_REPOSITORY}/actions/artifacts/${ARTIFACT_NAME}/${{ env.BRANCH }}/${ARTIFACT_NAME}"
+        echo "ARTIFACT_URL=$ARTIFACT_URL" >> $GITHUB_ENV
+
+    # Facultatif : Téléchargez l'artefact en utilisant l'URL obtenu
+    - name: Download Artifact
+      run: curl -L -o my-artifact.jar $ARTIFACT_URL
+
+    - name: Display Artifact URL
+      run: echo "Latest Artifact URL: $ARTIFACT_URL"
