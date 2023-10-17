@@ -1,1 +1,1 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/badgenamelink?branch=YourBranchName)](https://app.codacy.com/gh/sadikou-faiz/lmv/dashboard?branch=Developpement)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-A-brightgreen)](https://app.codacy.com/gh/sadikou-faiz/lmv/dashboard?branch=Developpement)
