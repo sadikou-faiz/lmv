@@ -1,27 +1,22 @@
-name: only-tests
-on: 
+name: CI
+
+on:
   push:
-    branches-ignore:
+    branches:
       - main
-      - Developpement
 
 jobs:
-  run-all-tests:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: 11
-          distribution: 'adopt'
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11
 
-      - name: Set up Maven
-        uses: stCarolas/setup-maven@v4.4
-        with:
-          maven-version: 3.8.2
-
-      - name: All the Tests and Coverage check
-        run: mvn clean install
+    - name: Build with Maven
+      run: mvn clean install
