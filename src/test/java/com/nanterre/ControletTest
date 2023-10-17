@@ -1,0 +1,35 @@
+import org.junit.jupiter.api.Test;
+import org.springframework.ui.Model;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ControleurTest {
+
+    @Test
+    public void testCalculate() {
+        Controleur controleur = new Controleur();
+        Model model = new Model() {
+            @Override
+            public Model addAttribute(String attributeName, Object attributeValue) {
+                return this;
+            }
+
+            @Override
+            public Model addAttribute(Object attributeValue) {
+                return this;
+            }
+
+            @Override
+            public Model addAllAttributes(Model model) {
+                return this;
+            }
+        };
+
+        String viewName = controleur.calculate(3, 5, model);
+
+        assertEquals("Calculer", viewName);
+
+        // Vérifiez que le résultat a été correctement ajouté au modèle
+        Object result = model.getAttribute("result");
+        assertEquals("3 + 5 = 8", result);
+    }
+}
