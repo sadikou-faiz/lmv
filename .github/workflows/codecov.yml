@@ -1,4 +1,4 @@
-name: CI/CD with Codecov
+name: Codecov
 
 on:
   push:
@@ -16,8 +16,11 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v2
       with:
-        java-version: 11  # Vous pouvez spécifier votre version Java préférée
-        distribution: 'adopt'
+        java-version: 11
+        distribution: 'adopt'  # Spécifiez la distribution Java que vous souhaitez utiliser
+
+    - name: Check Java version
+      run: java -version
 
     - name: Build and run tests with Maven
       run: |
