@@ -24,7 +24,7 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
-        java-version: 11  # Assurez-vous que la version Java est correcte pour votre projet (11 est un exemple)
+        java-version: 21  # Assurez-vous que la version Java est correcte pour votre projet (11 est un exemple)
         distribution: 'adopt'
 
  
