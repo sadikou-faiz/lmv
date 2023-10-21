@@ -46,11 +46,10 @@ jobs:
  
 
     steps:
-    - name: Upload Coverage Reports to Codecov
+    - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}  # Assurez-vous que votre jeton Codecov est stocké dans les secrets GitHub
-
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
  
 
 # N'oubliez pas d'ajuster les noms de tâches, les versions Java, les commandes Maven et toute autre configuration nécessaire en fonction de votre projet Spring Boot.
