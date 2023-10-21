@@ -3,7 +3,7 @@ name: CI/CD with Codecov
 on:
   push:
     branches:
-      - main  # Remplacez "main" par la branche que vous utilisez
+      - Developpement 
 
 jobs:
   build:
