@@ -3,7 +3,7 @@ name: CI/CD with Codecov
 on:
   push:
     branches:
-      - Developpement
+      - developpement
 
 jobs:
   build:
@@ -16,12 +16,12 @@ jobs:
     - name: Set up Java
       uses: actions/setup-java@v2
       with:
-        java-version: 11
-        distribution: 'adopt'  # Spécifiez la distribution Java que vous souhaitez utiliser
+        java-version: 11  # Vous pouvez spécifier votre version Java préférée
+        distribution: 'adopt'
 
     - name: Build and run tests with Maven
       run: |
-        mvn clean verify
+        mvn clean verify  # Assurez-vous que Maven est correctement configuré pour votre projet
         # À ce stade, vos tests sont supposés être exécutés et les rapports JaCoCo générés.
 
     - name: Upload coverage reports to Codecov
