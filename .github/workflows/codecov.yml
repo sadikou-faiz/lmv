@@ -1,4 +1,4 @@
-name: Codecov
+name: CI/CD with Codecov
 
 on:
   push:
@@ -18,14 +18,14 @@ jobs:
       with:
         java-version: 11  # Vous pouvez spécifier votre version Java préférée
 
-    - name: Build and run tests
+    - name: Build and run tests with Maven
       run: |
-        ./gradlew build  # Remplacez par votre commande de construction
-      # À ce stade, vos tests sont supposés être exécutés et les rapports JaCoCo générés.
+        mvn clean verify  # Remplacez par vos commandes Maven
+        # À ce stade, vos tests sont supposés être exécutés et les rapports JaCoCo générés.
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
-# N'oubliez pas de personnaliser les étapes de construction et de test en fonction de votre projet.
+# N'oubliez pas de personnaliser les commandes Maven en fonction de votre projet.
