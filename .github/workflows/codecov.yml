@@ -1,35 +1,56 @@
-name: Codecov
+name: CI/CD Pipeline
+
+ 
 
 on:
   push:
     branches:
-      - Developpement
+      - Development  # Changer "Developpement" en la branche que vous souhaitez déclencher
+
+ 
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
+ 
+
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v2
+
+ 
 
     - name: Set up Java
       uses: actions/setup-java@v2
       with:
-        java-version: 11
-        distribution: 'adopt'  # Spécifiez la distribution Java que vous souhaitez utiliser
+        java-version: 11  # Assurez-vous que la version Java est correcte pour votre projet (11 est un exemple)
 
-    - name: Check Java version
+ 
+
+    - name: Check Java Version
       run: java -version
 
-    - name: Build and run tests with Maven
-      run: |
-        mvn clean verify  # Assurez-vous que Maven est correctement configuré pour votre projet
-        # À ce stade, vos tests sont supposés être exécutés et les rapports JaCoCo générés.
+ 
 
-    - name: Upload coverage reports to Codecov
+    - name: Run Tests with Maven
+      run: |
+        mvn test  # Assurez-vous que la commande Maven pour exécuter vos tests est correcte
+
+ 
+
+  upload-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+
+ 
+
+    steps:
+    - name: Upload Coverage Reports to Codecov
       uses: codecov/codecov-action@v3
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
+        token: ${{ secrets.CODECOV_TOKEN }}  # Assurez-vous que votre jeton Codecov est stocké dans les secrets GitHub
 
-# N'oubliez pas de personnaliser les commandes Maven en fonction de votre projet.
+ 
+
+# N'oubliez pas d'ajuster les noms de tâches, les versions Java, les commandes Maven et toute autre configuration nécessaire en fonction de votre projet Spring Boot.
