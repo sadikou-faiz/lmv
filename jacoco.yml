@@ -1,0 +1,31 @@
+name: CI/CD with Codecov
+
+on:
+  push:
+    branches:
+      -  Developpement  # Remplacez "main" par la branche que vous utilisez
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: 11  # Vous pouvez spécifier votre version Java préférée
+
+    - name: Build and run tests
+      run: |
+        ./gradlew build  # Remplacez par votre commande de construction
+      # À ce stade, vos tests sont supposés être exécutés et les rapports JaCoCo générés.
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      env:
+        CODECOV_TOKEN: ${{ secrets.a2add647-1379-40ba-8895-ef3d68a89d5b}}
+
+# N'oubliez pas de personnaliser les étapes de construction et de test en fonction de votre projet.
