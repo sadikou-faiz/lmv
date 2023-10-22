@@ -1,57 +1,79 @@
-name: CI/CD Pipeline
-
- 
-
-on:
-  push:
-    branches:
-      - Developpement  # Changer "Developpement" en la branche que vous souhaitez déclencher
-
- 
-
+name: Workflow for Codecov Action
+on: [push, pull_request]
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
- 
-
+  no-deps:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-
- 
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: 17 # Assurez-vous que la version Java est correcte pour votre projet (11 est un exemple)
-        distribution: 'adopt'
-
- 
-
-    - name: Check Java Version
-      run: java -version
-
- 
-
-    - name: Run Tests with Maven
-      run: |
-         mvn test  # Assurez-vous que la commande Maven pour exécuter vos tests est correcte
-
- 
-
-  upload-coverage:
-    needs: test
-    runs-on: ubuntu-latest
-
- 
-
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+      - name: Upload coverage to Codecov (script)
+        uses: ./
+        with:
+          files: ./coverage/script/coverage-final.json
+          flags: script,${{ matrix.os }}
+          name: codecov-script
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage to Codecov (demo)
+        uses: ./
+        with:
+          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+          file: ./coverage/coverage-final.json
+          flags: demo,${{ matrix.os }}
+          name: codecov-demo
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage to Codecov (version)
+        uses: ./
+        with:
+          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+          file: ./coverage/coverage-final.json
+          flags: version,${{ matrix.os }}
+          name: codecov-version
+          version: v0.2.0
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-            file: ./target/CodeCoverageRepport/jacoco.xml
-
-     
-
+      - name: Checkout
+        uses: actions/checkout@v4.1.0
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run lint
+      - name: Run tests and collect coverage
+        run: npm run test
+      - name: Upload coverage to Codecov (script)
+        uses: ./
+        with:
+          files: ./coverage/script/coverage-final.json
+          flags: script,${{ matrix.os }}
+          name: codecov-script
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage to Codecov (demo)
+        uses: ./
+        with:
+          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+          file: ./coverage/coverage-final.json
+          flags: demo,${{ matrix.os }}
+          name: codecov-demo
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage to Codecov (version)
+        uses: ./
+        with:
+          files: ./coverage/calculator/coverage-final.json,./coverage/coverage-test/coverage-final.json
+          file: ./coverage/coverage-final.json
+          flags: version,${{ matrix.os }}
+          name: codecov-version
+          version: v0.2.0
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
