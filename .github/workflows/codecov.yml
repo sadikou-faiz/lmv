@@ -47,13 +47,9 @@ jobs:
  
 
     steps:
-      - name: Upload Coverage Reports to Codecov      
-        uses: codecov/codecov-action@v3     
-        with:        
-             token: ad615642-3aa8-4fe3-b6b2-34f439034244        
-             file: ./target/CodeCoverageRepport/jacoco.xml
-  # Assurez-vous que le chemin du fichier Jacoco.xml est correct
-
-     
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
      
 
