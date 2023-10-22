@@ -40,3 +40,4 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./target/CodeCoverageRepport/jacoco.xml
+        root: ./target/CodeCoverageRepport
