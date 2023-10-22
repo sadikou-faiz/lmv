@@ -18,6 +18,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: 17  # Utilisez la version Java 17 pour votre projet
+        distribution: 'adopt'
 
     - name: Check Java Version
       run: java -version
