@@ -53,6 +53,12 @@ jobs:
              token: ${{ secrets.CODECOV_TOKEN }}        
              file: ./target/CodeCoverageRepport/jacoco.xml
   # Assurez-vous que le chemin du fichier Jacoco.xml est correct
- 
+
+      - name: Envoyer les rapports à Codecov
+        run: |
+          bash <(curl -s https://codecov.io/bash) -t <votre_token_codecov>  # Remplacez <votre_token_codecov> par votre propre token
+
+  
+     
 
 # N'oubliez pas d'ajuster les noms de tâches, les versions Java, les commandes Maven et toute autre configuration nécessaire en fonction de votre projet Spring Boot.
