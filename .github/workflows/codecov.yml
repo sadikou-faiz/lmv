@@ -56,7 +56,7 @@ jobs:
 
       - name: Envoyer les rapports à Codecov
         run: |
-          bash <(curl -s https://codecov.io/bash) -t <votre_token_codecov>  # Remplacez <votre_token_codecov> par votre propre token
+          bash <(curl -s https://codecov.io/bash) -t ad615642-3aa8-4fe3-b6b2-34f439034244  # Remplacez <votre_token_codecov> par votre propre token
 
   
      
