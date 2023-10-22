@@ -5,6 +5,5 @@
 [![build](https://github.com/sadikou-faiz/lmv/actions/workflows/maven.yml/badge.svg?branch=Developpement)](https://github.com/sadikou-faiz/lmv/actions/workflows/maven.yml)
 
 [![Download Latest Artifact](https://img.shields.io/badge/Download-Latest%20Artifact-blue.svg)](https://github.com/sadikou-faiz/lmv/actions/workflows/maven.yml/artifacts)
-[![Codecov](https://app.codecov.io/github/malek62-info/lmv/commit/7f7257977907452b53fe5944546448a5ca8e0e81)
-
+[![codecov](https://codecov.io/gh/malek62-info/lmv/graph/badge.svg?token=OP5PN8JK8S)](https://codecov.io/gh/malek62-info/lmv)
 # signed commit from imane's ubuntu
