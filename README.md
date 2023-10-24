@@ -6,5 +6,7 @@
 
 [![Download Latest Artifact](https://img.shields.io/badge/Download-Latest%20Artifact-blue.svg)](https://github.com/sadikou-faiz/lmv/actions/workflows/maven.yml/artifacts)
 
+## Introduction
+LoveMyPet est une initiative découlant d'une profonde ambition : simplifier le processus d'adoption des animaux de compagnie tout en veillant à leur bien-être. À travers notre application web, nous visons à mettre en contact ceux qui souhaitent donner leur animal de compagnie et ceux qui désirent adopter un fidèle compagnon.
 
-# signed commit from imane's ubuntu
+Une fois l'adoption effectuée, LoveMyPet s'engage dans l'éducation des futurs propriétaires. Nous aspirons à promouvoir les meilleures pratiques de soins. Rejoignez-nous dans cette aventure afin d'offrir à chaque animal la chance de trouver un foyer aimant.
