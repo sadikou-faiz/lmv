@@ -14,7 +14,7 @@ Upon completion of the adoption process, LoveMyPet is dedicated to educating fut
 
 ## Prerequisites 
 
-**Java:**  LoveMyPet is developed using Java. Make sure to have Java installed on your machine.
+**Java:**  LoveMyPet is developed using Java. Make sure to have Java installed on your machine.\br
 **Maven:** We use Maven as a dependency and build manager. Ensure that Maven is installed.
 **Spring Boot:** LoveMyPet is built on the Spring Boot framework. Make sure to have Spring Boot installed.
 **JaCoCo:** JaCoCo is utilized for code coverage analysis. Ensure that JaCoCo is integrated into your development environment.
