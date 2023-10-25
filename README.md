@@ -33,9 +33,12 @@ To install LoveMyPet directly from the source code using Git, follow these steps
 
 2. **Compile the project with Maven:** Use the following command in the directory of the cloned project: mv clean install
 
-3. **Execute the generated JAR file:** Once the compilation is complete, run the generated JAR file with the command: java -jar LoveMyPet-0.0.1-SNAPSHOT.jar
+## Launch 
 
-4. **In your browser, go to:** Open your browser and visit http://localhost:8081/Calcule to display our homepage.
+After successfully installing LoveMyPet, you can launch the application :
 
+1. **Execute the generated JAR file:** Once the compilation is complete, run the generated JAR file with the command: java -jar LoveMyPet-0.0.1-SNAPSHOT.jar
 
+2. **In your browser, go to:** Open your browser and visit http://localhost:8081/Calcule to display our homepage.
 
+!!!!!!!!!!!!! a ajouter mysql :  changement de mdp 
