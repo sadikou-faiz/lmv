@@ -25,4 +25,17 @@ Upon completion of the adoption process, LoveMyPet is dedicated to educating fut
 
 **JaCoCo:** JaCoCo is utilized for code coverage analysis. Ensure that JaCoCo is integrated into your development environment.
 
+## Installation 
+
+To install LoveMyPet directly from the source code using Git, follow these steps:
+
+1. **Clone the repository:** git clone ...
+
+2. **Compile the project with Maven:** Use the following command in the directory of the cloned project: mv clean install
+
+3. **Execute the generated JAR file:** Once the compilation is complete, run the generated JAR file with the command: java -jar LoveMyPet-0.0.1-SNAPSHOT.jar
+
+4. **In your browser, go to:** Open your browser and visit http://localhost:8081/Calcule to display our homepage.
+
+
 
