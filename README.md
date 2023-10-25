@@ -29,7 +29,7 @@ Upon completion of the adoption process, LoveMyPet is dedicated to educating fut
 
 To install LoveMyPet directly from the source code using Git, follow these steps:
 
-1. **Clone the repository:** git clone ...
+1. **Clone the repository:** ```git clone https://github.com/malek62-info/LoveMyPet.git```
 
 2. **Compile the project with Maven:** Use the following command in the directory of the cloned project: mv clean install
 
