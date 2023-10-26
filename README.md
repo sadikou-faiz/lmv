@@ -31,20 +31,23 @@ To install LoveMyPet, you have two options:
 
 1. **Install from the Source Code using Git:**
    - Clone the repository: `git clone https://github.com/malek62-info/LoveMyPet.git`
+   - Use the command `cd LoveMyPet`to access to the main repository
    - Compile the project with Maven: Use the command `mvn clean install` in the cloned project directory.
 
 Or,
 
 2. **Download the Zip File:**
    1. Go to [https://github.com/malek62-info/LoveMyPet](https://github.com/malek62-info/LoveMyPet)
-   2. Click on the latest workflow run.
-   3. Scroll down the page and click on **my-artifact**.
+   2. Click sur Actions
+   3. Click on the latest workflow run.
+   4. Scroll down the page and click on **my-artifact**.
 
 ## Configuration
 
 In the project directory, navigate to **classes**, then open **application.properties**, and change the following two lines:
 
 ```
+spring.datasource.url=jdbc:mysql://localhost:3306/name-of-data-base
 spring.datasource.username=username
 spring.datasource.password=password
 ```
