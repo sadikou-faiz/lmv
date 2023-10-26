@@ -51,7 +51,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/name-of-data-base
 spring.datasource.username=username
 spring.datasource.password=password
 ```
-Update them using your MySQL username and password.
+Make sure to change name-of-data-base and put the name of your MySQL database and username,password with you MySQL username and password.
 
 ## Launch 
 
