@@ -2,8 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - Developpement  # Changer "develop" en la branche que vous souhaitez déclencher
+
   pull_request:
 
 jobs:
