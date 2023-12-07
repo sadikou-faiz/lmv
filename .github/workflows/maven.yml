@@ -33,7 +33,9 @@ jobs:
       run: asciidoctor -o docs/index.html docs/documentation.adoc
 
     - name: Convert AsciiDoc to PDF
-      run: asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
+      run: |
+        ./gems/bin/asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
+         working-directory: $GITHUB_WORKSPACE
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
