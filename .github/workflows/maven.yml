@@ -24,8 +24,10 @@ jobs:
 
     - name: Install Asciidoctor and Asciidoctor PDF
       run: |
-        sudo apt-get install -y asciidoctor
-        gem install asciidoctor-pdf --version '< 2.0'
+          sudo apt-get install -y asciidoctor
+          gem install asciidoctor-pdf --version '< 2.0' --install-dir=./gems
+          export PATH=$PATH:./gems/bin
+
 
     - name: Generate AsciiDoc Documentation
       run: asciidoctor -o docs/index.html docs/documentation.adoc
