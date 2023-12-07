@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - Developpement
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,9 +19,9 @@ jobs:
         java-version: 17
         distribution: 'temurin'
 
-    - name: Install Asciidoctor
+    - name: Install Asciidoctor and Asciidoctor PDF
       run: |
-        sudo apt-get install -y asciidoctor
+        sudo apt-get install -y asciidoctor asciidoctor-pdf
 
     - name: Generate AsciiDoc Documentation
       run: asciidoctor -o docs/index.html docs/documentation.adoc
