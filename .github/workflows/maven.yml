@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - Developpement
+  pull_request:
+    branches:
+      - Developpement
 
 jobs:
   build:
@@ -21,7 +24,8 @@ jobs:
 
     - name: Install Asciidoctor and Asciidoctor PDF
       run: |
-        sudo apt-get install -y asciidoctor asciidoctor-pdf
+        sudo apt-get install -y asciidoctor
+        gem install asciidoctor-pdf --version '< 2.0'
 
     - name: Generate AsciiDoc Documentation
       run: asciidoctor -o docs/index.html docs/documentation.adoc
