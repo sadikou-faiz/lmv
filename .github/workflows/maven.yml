@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI with Maven and AsciiDoc
 
 on:
   push:
@@ -35,13 +35,10 @@ jobs:
       run: |
         gem update asciidoctor-pdf --user-install
         export PATH=$HOME/.gem/ruby/*/bin:$PATH
-      working-directory: ${{ github.workspace }}
-
 
     - name: Convert AsciiDoc to PDF
       run: |
-        ./gems/bin/asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
-      working-directory: $GITHUB_WORKSPACE
+        asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
