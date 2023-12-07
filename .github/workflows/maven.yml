@@ -28,9 +28,15 @@ jobs:
         gem install asciidoctor-pdf --version '< 2.0' --install-dir=./gems
         echo "export PATH=$PATH:./gems/bin" >> $HOME/.bashrc
         source $HOME/.bashrc
+        gem list asciidoctor-pdf --local
 
     - name: Generate AsciiDoc Documentation
       run: asciidoctor -o docs/index.html docs/documentation.adoc
+
+    - name: Check contents of ./gems/bin
+      run: |
+        ls -l ./gems/bin
+      working-directory: $GITHUB_WORKSPACE
 
     - name: Update Asciidoctor PDF gem
       run: |
