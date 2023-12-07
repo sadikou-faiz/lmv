@@ -35,7 +35,7 @@ jobs:
 
     - name: Check contents of ./gems/bin
       run: |
-        ls -l $GITHUB_WORKSPACE/gems/bin
+        ls -l gems/bin
       working-directory: $GITHUB_WORKSPACE
 
     - name: Update Asciidoctor PDF gem
