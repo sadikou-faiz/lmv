@@ -22,34 +22,16 @@ jobs:
         java-version: 17
         distribution: 'temurin'
 
-    - name: Install Asciidoctor and Asciidoctor PDF
-      run: |
-        sudo apt-get install -y asciidoctor
-        gem install asciidoctor-pdf --version '< 2.0' --install-dir=./gems
-        echo "export PATH=$PATH:$GITHUB_WORKSPACE/gems/bin" >> $HOME/.bashrc
-        source $HOME/.bashrc
-        gem list asciidoctor-pdf --local
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
 
     - name: Generate AsciiDoc Documentation
       run: asciidoctor -o docs/index.html docs/documentation.adoc
 
-    - name: Check contents of ./gems/bin
-      run: |
-        cd gems/bin
-        ls -l
-      working-directory: $GITHUB_WORKSPACE
-    
-
-    - name: Update Asciidoctor PDF gem
-      run: |
-        gem update asciidoctor-pdf --user-install
-        export PATH=$HOME/.gem/ruby/*/bin:$PATH
-
     - name: Convert AsciiDoc to PDF
-      run: |
-        asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
+      run: docker run --rm -v $PWD:/documents asciidoctor/docker-asciidoctor asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
 
-    - name: Build with Maven
+    - name: Build with Maven (Again, if necessary)
       run: mvn -B package --file pom.xml
 
     - name: Publish JAR or WAR and Documentation as Artifacts
