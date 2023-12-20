@@ -1,42 +1,72 @@
-name: CI/CD Pipeline
+name: Java CI with Maven and PDF Documentation
 
 on:
   push:
     branches:
-      - Developpement  # Changer "develop" en la branche que vous souhaitez déclencher
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Java
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
-        java-version: 17  # Utilisez la version Java 17 pour votre projet
-        distribution: 'adopt'
+        java-version: 17
+        distribution: 'temurin'
 
-    - name: Check Java Version
-      run: java -version
+    - name: Install Asciidoctor
+      run: |
+        sudo apt-get install -y asciidoctor
 
     - name: Build with Maven
-      run: |
-        mvn clean install -DskipTests  # Vous pouvez ajouter d'autres options de construction selon vos besoins
+      run: mvn -B package --file pom.xml
 
-    - name: Run Tests
-      run: mvn test
+    - name: Generate AsciiDoc Documentation
+      run: asciidoctor -o docs/index.html docs/documentation.adoc
 
-  upload-coverage:
-    needs: build 
-    runs-on: ubuntu-latest
+    - name: Convert AsciiDoc to PDF
+      run: docker run --rm -v $PWD:/documents asciidoctor/docker-asciidoctor asciidoctor-pdf -o docs/documentation.pdf docs/documentation.adoc
 
-    steps:
-    - name: Upload Coverage Reports to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Build with Maven (Again, if necessary)
+      run: mvn -B package --file pom.xml
+
+    - name: Publish JAR or WAR and Documentation as Artifacts
+      uses: actions/upload-artifact@v2
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./target/CodeCoverageRepport/jacoco.xml
+        name: my-artifact
+        path: |
+          target/
+          docs/
+
+    - name: Move PDF to Release Directory
+      run: mv docs/documentation.pdf $GITHUB_WORKSPACE
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this release.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/documentation.pdf
+        asset_name: documentation.pdf
+        asset_content_type: application/pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
