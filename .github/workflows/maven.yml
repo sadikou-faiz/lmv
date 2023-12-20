@@ -1,12 +1,12 @@
-name: Java CI with Maven and AsciiDoc
+name: Java CI with Maven and PDF Documentation
 
 on:
   push:
     branches:
-      - Developpement
+      - main
   pull_request:
     branches:
-      - Developpement
+      - main
 
 jobs:
   build:
@@ -46,10 +46,27 @@ jobs:
           target/
           docs/
 
-    - name: Display Artifact URL
-      run: |
-        ARTIFACT_URL="${{ github.server_url }}/${{ github.repository }}/raw/${{ github.ref }}/my-artifact/"
-        echo "Latest Artifact URL: $ARTIFACT_URL"
-        echo "##[set-output name=artifact_url;]$ARTIFACT_URL"
+    - name: Move PDF to Release Directory
+      run: mv docs/documentation.pdf $GITHUB_WORKSPACE
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this release.
       env:
-        ARTIFACT_URL: ${{ github.server_url }}/${{ github.repository }}/raw/${{ github.ref }}/my-artifact/
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/documentation.pdf
+        asset_name: documentation.pdf
+        asset_content_type: application/pdf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
