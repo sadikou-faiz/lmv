@@ -3,10 +3,10 @@ name: Java CI with Maven and PDF Documentation
 on:
   push:
     branches:
-      - main
+      - Developpement
   pull_request:
     branches:
-      - main
+      - Developpement
 
 jobs:
   build:
